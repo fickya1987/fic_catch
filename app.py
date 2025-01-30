@@ -23,7 +23,7 @@ if query:
         thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
         thought_response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia dan english. Jangan lupa untuk memberikan font italic!"},
+            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia. Jangan lupa untuk memberikan font italic dan ukuran font harus lebih kecil dibandingkan hasil output dari Answer!"},
                       {"role": "user", "content": thought_prompt}],
             temperature=1.0,
             max_tokens=2048
@@ -35,7 +35,7 @@ if query:
         # Step 2: Generate the final response with streaming
         response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail!"},
+            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail! Dan berikan jawaban dalam bentuk paragraph dan sebisa mungkin beri case study yang kamu ketahui. Apabila ditanya dan diperlukan tabel dan atau grafik, mohon berikan."},
                       {"role": "user", "content": query}],
             temperature=1.0,
             max_tokens=2048,
