@@ -23,7 +23,7 @@ if query:
         thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
         thought_response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia. Jangan lupa untuk memberikan font italic dan ukuran font harus lebih kecil dibandingkan hasil output dari Answer!"},
+            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia. Jangan lupa untuk memberikan font italic dan ukuran font sebisa mungkin kecil di kisaran 9"},
                       {"role": "user", "content": thought_prompt}],
             temperature=1.0,
             max_tokens=2048
