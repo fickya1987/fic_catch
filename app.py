@@ -35,7 +35,7 @@ if query:
         # Step 2: Generate the final response with streaming
         response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail! Dan berikan jawaban dalam bentuk paragraph dan sebisa mungkin beri case study yang kamu ketahui. Apabila ditanya dan diperlukan tabel dan atau grafik, mohon berikan."},
+            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail! Dan berikan jawaban dalam bentuk paragraph dan sebisa mungkin beri case study yang kamu ketahui. Apabila ditanya dan diperlukan tabel, mohon berikan. Mohon juga bentuk kata dan narasi jangan sama dengan yang process thought (Step 1), kalau bisa dielaborasi lagi dari yang Step 1!"},
                       {"role": "user", "content": query}],
             temperature=1.0,
             max_tokens=2048,
