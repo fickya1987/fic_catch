@@ -1,0 +1,58 @@
+import openai
+import streamlit as st
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# Set OpenAI API Key
+openai.api_key = OPENAI_API_KEY
+
+# Streamlit UI
+st.set_page_config(page_title="AI Search Engine", layout="wide")
+st.title("🔍 AI Search Engine with Thought Process (GPT-4o)")
+
+# User input
+query = st.text_input("Ask me anything:", "")
+
+if query:
+    with st.spinner("🤔 Thinking..."):
+        # Step 1: Generate thought process
+        thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
+        thought_response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering."},
+                      {"role": "user", "content": thought_prompt}],
+            temperature=0.7
+        )
+        thought_text = thought_response["choices"][0]["message"]["content"]
+        st.markdown(f"**🤖 Thought Process:**\n\n{thought_text}")
+
+    with st.spinner("💡 Generating answer..."):
+        # Step 2: Generate the final response with streaming
+        response = openai.ChatCompletion.create(
+            model="gpt-4o",
+            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers."},
+                      {"role": "user", "content": query}],
+            temperature=1.0,
+            stream=True  # Enable streaming
+        )
+
+        # Stream output dynamically
+        response_container = st.empty()
+        full_response = ""
+
+        for chunk in response:
+            if "choices" in chunk and chunk["choices"]:
+                delta = chunk["choices"][0].get("delta", {}).get("content", "")
+                full_response += delta
+                response_container.write(full_response)
+
+    # Display final answer
+    st.markdown(f"### **📝 Final Answer:**\n\n{full_response}")
+
+    # Optional: Add feedback section
+    st.markdown("Did this answer your question? [👍 Yes] [👎 No]")
+
