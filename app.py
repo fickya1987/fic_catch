@@ -38,7 +38,7 @@ if query:
             messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail!"},
                       {"role": "user", "content": query}],
             temperature=1.0,
-            max_tokens=2048
+            max_tokens=2048,
             stream=True  # Enable streaming
         )
 
