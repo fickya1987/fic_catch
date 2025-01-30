@@ -23,7 +23,7 @@ if query:
         thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
         thought_response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia. Jangan lupa untuk memberikan font italic dan ukuran font sebisa mungkin kecil di kisaran 9"},
+            messages=[{"role": "system", "content": "<small><i>Anda adalah AI yang memberikan pemikiran terstruktur dan framework of thinking sebagai acuan dalam menjawab. Silakan berikan pemikiran Anda dalam bentuk paragraf.</i></small>"},
                       {"role": "user", "content": thought_prompt}],
             temperature=1.0,
             max_tokens=2048
@@ -35,7 +35,7 @@ if query:
         # Step 2: Generate the final response with streaming
         response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI assistant that provides detailed, thoughtful answers. Elaborasi jawaban dengan detail! Dan berikan jawaban dalam bentuk paragraph dan sebisa mungkin beri case study yang kamu ketahui. Apabila ditanya dan diperlukan tabel, mohon berikan. Mohon juga bentuk kata dan narasi jangan sama dengan yang process thought (Step 1), kalau bisa dielaborasi lagi dari yang Step 1!"},
+            messages=[{"role": "system", "content": "Kamu adalah AI Assistant yang dapat memberi jawaban detail dan mampu mengelaborasi jawaban dengan detail! Dan berikan jawaban dalam bentuk paragraph dan sebisa mungkin beri case study yang kamu ketahui. Apabila ditanya dan diperlukan tabel, mohon berikan. Mohon juga bentuk kata dan narasi jangan sama dengan yang process thought (Step 1), kalau bisa dielaborasi lagi dari yang Step 1!"},
                       {"role": "user", "content": query}],
             temperature=1.0,
             max_tokens=2048,
