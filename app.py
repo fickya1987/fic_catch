@@ -23,7 +23,7 @@ if query:
         thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
         thought_response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "Anda adalah AI yang memberikan pemikiran terstruktur dan framework of thinking sebagai acuan dalam menjawab. Silakan berikan pemikiran Anda dalam bentuk paragraf. Gunakan Bahasa yang casual dan berikan juga urutan berpikir yang digunakan dalam menjawab pertanyaan yang diajukan!"},
+            messages=[{"role": "system", "content": "Anda adalah AI yang memberikan pemikiran terstruktur dan framework of thinking sebagai acuan dalam menjawab pertanyaan. Silakan gunakan Bahasa yang casual dan berikan juga urutan berpikir sesuai kaidah critical thinking yang digunakan dalam menjawab pertanyaan yang diajukan! Sajikan dalam beberapa paragraph. Tidak perlu langsung menjawab pertanyaan tapi berikan sistematika berpikirnya!"},
                       {"role": "user", "content": thought_prompt}],
             temperature=1.0,
             max_tokens=2048
