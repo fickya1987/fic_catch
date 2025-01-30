@@ -11,8 +11,8 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 # Streamlit UI
-st.set_page_config(page_title="AI Search Engine", layout="wide")
-st.title("🔍 AI Search Engine with Thought Process (GPT-4o)")
+st.set_page_config(page_title="Pelindo AI Search Engine", layout="wide")
+st.title("🔍 AI Search Engine with Thought Process + Answer")
 
 # User input
 query = st.text_input("Ask me anything:", "")
@@ -23,9 +23,10 @@ if query:
         thought_prompt = f"Analyze the following question and describe how an AI should approach answering it: {query}"
         thought_response = openai.ChatCompletion.create(
             model="gpt-4o",
-            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering."},
+            messages=[{"role": "system", "content": "You are an AI that provides structured thought before answering. Please provide your thought in paragraphs dan elaborasi jawaban dalam bahasa indonesia dan english. Jangan lupa untuk memberikan font italic!"},
                       {"role": "user", "content": thought_prompt}],
-            temperature=0.7
+            temperature=1.0,
+            max_tokens=2048
         )
         thought_text = thought_response["choices"][0]["message"]["content"]
         st.markdown(f"**🤖 Thought Process:**\n\n{thought_text}")
