@@ -12,7 +12,7 @@ openai.api_key = OPENAI_API_KEY
 
 # Streamlit UI
 st.set_page_config(page_title="Pelindo AI Search Engine", layout="wide")
-st.title("🔍 AI Search Engine with Thought Process + Answer")
+st.title("🔍 Pelindo AI Search Engine with Thought Process + Answer")
 
 # User input
 query = st.text_input("Ask me anything:", "")
@@ -53,8 +53,8 @@ if query:
                 response_container.write(full_response)
 
     # Display final answer
-    st.markdown(f"### **📝 Final Answer:**\n\n{full_response}")
+    st.markdown(f"### **📝 Kesimpulan:**\n\n{full_response}")
 
     # Optional: Add feedback section
-    st.markdown("Did this answer your question? [👍 Yes] [👎 No]")
+    st.markdown("Apakah menjawab pertanyaan Anda? [👍 Yes] [👎 No]")
 
